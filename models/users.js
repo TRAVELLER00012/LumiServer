@@ -38,7 +38,7 @@ const Users = mongoose.model("User",schema)
 function validate(user){
     const schema = Joi.object({
         name: Joi.string().required().max(100).min(3),
-        email: Joi.string().required().max(255).min(5),
+        email: Joi.string().required().max(255).min(5).email(),
         password: Joi.string().required().max(100).min(8),
         isAdmin: Joi.boolean()
     })
