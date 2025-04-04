@@ -22,7 +22,11 @@ const schema = new mongoose.Schema({
         minLength:8,
         required: true
     },
-    isAdmin:Boolean
+    isAdmin:{
+        type:Boolean,
+        required:false,
+        default:false
+    }
 })
 
 schema.methods.generateAuthToken = function(){
@@ -35,7 +39,8 @@ function validate(user){
     const schema = Joi.object({
         name: Joi.string().required().max(100).min(3),
         email: Joi.string().required().max(255).min(5),
-        password: Joi.string().required().max(100).min(8)
+        password: Joi.string().required().max(100).min(8),
+        isAdmin: Joi.boolean()
     })
     return schema.validate(user)
 }
