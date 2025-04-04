@@ -1,8 +1,10 @@
 process.env.NODE_ENV = 'development';
+process.env.lumi_jwtPrivateKey="mySecureKey";
 const express = require("express")
 
 const app = express()
 
+require('./startup/db')();
 require('./startup/routes')(app);
 
 

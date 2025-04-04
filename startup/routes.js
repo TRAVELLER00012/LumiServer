@@ -1,7 +1,7 @@
 const express = require("express")
-const auth = require("../routes/test")
+const users = require("../routes/users")
 
 module.exports = (app) =>{
     app.use(express.json())
-    app.use("/api/test",auth)
+    app.use("/api/users",users)
 }
