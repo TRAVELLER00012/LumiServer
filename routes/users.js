@@ -1,13 +1,13 @@
 const express = require("express")
 const bcrypt = require("bcrypt")
 const _ = require("lodash")
+const { Users, validateUser } = require("../models/users")
+const auth = require("../middleware/auth")
 const router = express.Router()
 
-const { Users, validateUser } = require("../models/users")
-
-router.get("/me",async (req,res) =>{
+router.get("/me",auth,async (req,res) =>{
     try{
-        const user = await Users.findById(req.body.id).select({password:0})
+        const user = await Users.findById(req.user._id).select({password:0})
         res.send(user)
     }catch(e){
         res.status(400).send(e.message)
