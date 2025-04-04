@@ -3,8 +3,8 @@ const express = require("express")
 
 const app = express()
 
-app.use(express.json())
-app.use(express.urlencoded(true))
+require('./startup/routes')(app);
+
 
 console.log("ENV: "+ process.env.NODE_ENV);
 
