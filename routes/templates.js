@@ -2,8 +2,10 @@ const express = require("express")
 const _ = require("lodash")
 const router = express.Router()
 const { Templates, validateTemplate, validateTemplateForPut } = require("../models/templates")
+const auth = require("../middleware/auth")
+const admin = require("../middleware/admin")
 
-router.get("/",async(req,res) =>{
+router.get("/",auth,async(req,res) =>{
     const categoryId = req.query.id
     let templates;
     try{
@@ -15,7 +17,7 @@ router.get("/",async(req,res) =>{
     }
 })
 
-router.get("/:id",async(req,res) =>{
+router.get("/:id",auth,async(req,res) =>{
     try{
         const result = await Templates.findById(req.params.id)
         res.send(result)
@@ -24,7 +26,7 @@ router.get("/:id",async(req,res) =>{
     }
 })
 
-router.post("/",async(req,res)=>{
+router.post("/",[auth,admin],async(req,res)=>{
     const body = req.body
     const {error} = validateTemplate(body)
     if(error) return res.status(400).send(error.message)
@@ -40,7 +42,7 @@ router.post("/",async(req,res)=>{
     }
 })
 
-router.put("/:id",async(req,res) =>{
+router.put("/:id",[auth,admin],async(req,res) =>{
     const body = req.body
     const {error} = validateTemplateForPut(body)
     if(error) return res.status(400).send(err.message)
