@@ -10,6 +10,5 @@ module.exports = (app) =>{
     app.use("/api/users",users)
     app.use("/api/auth",auth)
     app.use("/api/categories",categories)
-    app.use("/api/templates",templates)
     app.use("/api/projects",projects)
 }
