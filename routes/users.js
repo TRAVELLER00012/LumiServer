@@ -17,7 +17,7 @@ router.get("/me",auth,async (req,res) =>{
 router.post("/", async (req,res) =>{
     const body = req.body
     const {error} = validateUser(body)
-    if(error) res.status(400).send(error.message)
+    if(error) return res.status(400).send(error.message)
     try{
         const user = await Users.findOne({email:body.email})
         if (user) return res.status(400).send("User already exists")

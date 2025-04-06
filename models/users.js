@@ -18,9 +18,9 @@ const schema = new mongoose.Schema({
     },
     password: {
         type: String,
+        required: true,
         maxLength: 100,
-        minLength:8,
-        required: true
+        minLength:8
     },
     isAdmin:{
         type:Boolean,
